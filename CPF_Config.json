@@ -1,0 +1,126 @@
+{
+  "CPF": {
+    "NumberParticlesPerDimension" : 20,
+    "numberOfParticlesToSample" : 50,
+    "averagePerformanceLength": 10,
+    "MaxIter" : 100,
+    "StartingPerformance": -3000,
+    "performanceThreshold": -1000,
+    "ParameterRanges" : {
+      "P": {
+        "min": 0,
+        "max": 20000
+      },
+      "I": {
+        "min": 0,
+        "max": 0
+      },
+      "D": {
+        "min": 0,
+        "max": 20000
+      }
+    }
+  },
+
+  "CPF_Plant": {
+    "type" :"Quadcopter",
+    "path" :"Vehicles.Quadcopter.quadcopter",
+    "environment" : {
+      "RotorFault": {
+          "enabled": "True",
+          "min_magnitude" : 0,
+          "max_magnitude" : 0.30,
+          "randomTime" : "True",
+          "starttime": 500,
+          "endtime" : 31000,
+          "randomRotor" : "True",
+          "faultRotorID" : 1
+      },
+      "Wind": {
+          "enabled": "False",
+          "min_magnitude" : 0,
+          "max_magnitude" : 3,
+          "randomDirection" : "False",
+          "direction" : 1
+      },
+      "PositionNoise": {
+          "enabled": "False",
+          "min_magnitude" : 0,
+          "max_magnitude" : 0.3
+      },
+      "AttitudeNoise": {
+          "enabled": "False",
+          "min_magnitude" : 0,
+          "max_magnitude" : 0.1
+      }
+    },
+
+    "Config":{
+        "position": [0, 0, 0],
+        "orientation": [0, 0, 0],
+        "L": 0.3,
+        "r": 0.1,
+        "prop_size": [10, 4.5],
+        "weight": 1.2
+    },
+    "Path": {
+      "randomPath": "True",
+      "randomSeed": 1234,
+      "randomLimit": 8,
+      "waypoints": {
+        "x": [
+          0,
+          0,
+          0,
+          5,
+          5
+        ],
+        "y": [
+          0,
+          0,
+          0,
+          5,
+          5
+        ],
+        "z": [
+          0,
+          0,
+          0,
+          5,
+          5
+        ]
+      },
+      "safetyRadius": 1,
+      "maxStepsPerRun": 3000,
+      "stablilizationAtGoal": 100
+    },
+    "Controller": {
+      "type" :"PID",
+      "path" :"Controllers.PID.PID_Controller",
+      "Config":{
+          "Motor_limits": [0, 9000],
+           "Tilt_limits": [-10, 10],
+           "Yaw_Control_Limits": [-900, 900],
+           "Z_XY_offset": 500,
+           "Linear_PID": {"P": [300, 300, 7000],
+                          "I": [0.04, 0.04, 4.5],
+                          "D": [450, 450, 5000]},
+           "Linear_To_Angular_Scaler": [1, 1, 0],
+           "Yaw_Rate_Scaler": 0.18,
+           "Angular_PID": [{"P": [0, 0, 1500],
+                             "I": [0, 0, 1.2],
+                             "D": [0, 0, 0]}]
+      }
+    }
+  },
+
+
+
+  "Database":{
+      "newFile": "True",
+      "folder" : "Database/",
+      "path" : ""
+  }
+
+
+}
