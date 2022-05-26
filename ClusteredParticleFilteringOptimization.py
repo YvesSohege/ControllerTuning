@@ -17,7 +17,7 @@ class ClusteredParticleFilteringOptimization():
         self.controllerConfig = controllerConfig
         self.plantConfig = plantConfig
         self.databaseConfig = databaseConfig
-        if bool(self.databaseConfig['newFile']):
+        if self.databaseConfig['newFile'] == "True":
             dt = str(datetime.datetime.now())[:16].replace(":","-")
             FileName = self.databaseConfig['folder']+"CPF_Results-"+dt+".json"
             print(FileName)
@@ -365,7 +365,7 @@ class ClusteredParticleFilteringOptimization():
         print("CPF running")
 
         for env in self.Environment:
-            enabled = bool(self.Environment[env]['enabled'])
+            enabled = self.Environment[env]['enabled'] == "True"
             if enabled:
 
                 self.initilizeParticles()
