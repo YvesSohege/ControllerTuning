@@ -365,8 +365,8 @@ class ClusteredParticleFilteringOptimization():
         print("CPF running")
 
         for env in self.Environment:
-
-            if bool(self.Environment[env]['enabled']):
+            enabled = bool(self.Environment[env]['enabled'])
+            if enabled:
 
                 self.initilizeParticles()
 
