@@ -92,15 +92,23 @@ class ClusteredParticleFilteringOptimization():
 
         return
 
-    def setRandomEnvironmentMagnitude(self, env):
+
+    def setTaskEnv(self,env):
         self.TaskEnv = self.Environment[env]
+        return
+
+    def setRandomEnvironmentMagnitude(self):
+        # self.TaskEnv = self.Environment[env]
+        print(self.TaskEnv)
         min = self.TaskEnv['min_magnitude']
         max = self.TaskEnv['max_magnitude']
         self.TaskEnv['magnitude'] = random.uniform(min,max)
 
-    def setFixedEnvironment(self, env):
-        self.TaskEnv = self.Environment[env]
-        self.TaskEnv['magnitude'] = self.TaskEnv['min_magnitude']
+    def setFixedEnvironment(self, percent):
+        min = self.TaskEnv['min_magnitude']
+        max = self.TaskEnv['max_magnitude']
+        val = min+ ((max - min)*percent)
+        self.TaskEnv['magnitude'] = val
         return
 
     def evaluateParticle(self, controller):
@@ -281,7 +289,7 @@ class ClusteredParticleFilteringOptimization():
         if not cluster == []:
             hull = ConvexHull(clusterPoints)
 
-    def render(self):
+    def render3D(self):
         if self.render:
             self.ax.cla()
             # self.ax1.cla()
@@ -363,11 +371,9 @@ class ClusteredParticleFilteringOptimization():
                 self.initilizeParticles()
 
                 if self.render:
-                    self.render()
+                    self.render3D()
 
-
-                self.setRandomEnvironmentMagnitude()
-
+                self.setTaskEnv(env)
 
                 self.runParticleFiltering()
 
